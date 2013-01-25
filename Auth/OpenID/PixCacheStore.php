@@ -6,9 +6,9 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
 
     protected $cache;
 
-    function __construct()
+    function __construct($cache)
     {
-        $this->cache = new Pix_Cache();
+        $this->cache = $cache;
     }
 
     /**
