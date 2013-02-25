@@ -1,6 +1,6 @@
 <?php
 
-require('Auth/OpenID/Interface.php');
+require_once('Auth/OpenID/Interface.php');
 
 class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
 
