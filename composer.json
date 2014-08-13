@@ -1,10 +1,10 @@
 {
-    "name": "openid/php-openid",
+    "name": "pixnet/php-openid",
     "version": "2.2.2",
     "description": "OpenID library for PHP5",
     "keywords": ["openid", "authentication", "yadis", "auth"],
     "license": "Apache-2.0",
-    "homepage": "http://github.com/openid/php-openid",
+    "homepage": "http://github.com/pixnet/php-openid",
     "authors": [
         {
             "name": "JanRain Inc.",
