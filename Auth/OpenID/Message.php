@@ -684,7 +684,6 @@ class Auth_OpenID_Message {
         foreach ($this->toPostArgs() as $name => $value) {
             $form .= sprintf(
                         "<input type=\"hidden\" name=\"%s\" value=\"%s\" />\n",
-                        $name, $value);
                         htmlspecialchars($name), htmlspecialchars($value));
         }
 
