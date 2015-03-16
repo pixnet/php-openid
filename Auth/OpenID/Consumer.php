@@ -178,6 +178,7 @@ require_once "Auth/Yadis/XRI.php";
  * successfully.
  */
 define('Auth_OpenID_SUCCESS', 'success');
+define('AUTH_OPENID_SUCCESS', Auth_OpenID_SUCCESS);
 
 /**
  * Status to indicate cancellation of OpenID authentication.
