@@ -271,5 +271,24 @@ class Auth_Yadis_ParanoidHTTPFetcher extends Auth_Yadis_HTTPFetcher {
         return new Auth_Yadis_HTTPResponse($url, $code,
                                            $new_headers, $body);
     }
+
+    /**
+     * getAuthOpenIdHttpProxy
+     *
+     * @access private
+     * @return string
+     */
+    private function getAuthOpenIdHttpProxy()
+    {
+        // 換成符合 PSR 的常數命名
+        if (defined('AUTH_OPENID_HTTP_PROXY')) {
+            return constant('AUTH_OPENID_HTTP_PROXY');
+        }
+
+        // 之後確認專案都沒有用到 Auth_OpenID_HTTP_PROXY 後，再移除
+        if (defined('Auth_OpenID_HTTP_PROXY')) {
+            return constant('Auth_OpenID_HTTP_PROXY');
+        }
+    }
 }
 
