@@ -56,7 +56,8 @@ $Auth_OpenID_sreg_data_fields = array(
                                       'postcode' => 'Postal Code',
                                       'country' => 'Country',
                                       'language' => 'Language',
-                                      'timezone' => 'Time Zone');
+                                      'timezone' => 'Time Zone',
+                                      'keeplogin' => 'Keep Login');
 
 /**
  * Check to see that the given value is a valid simple registration
