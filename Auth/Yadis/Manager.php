@@ -516,7 +516,7 @@ class Auth_Yadis_Discovery {
     {
         if ($this->getManager($force) !== null) {
             $key = $this->getSessionKey();
-            $this->session->del($key);
+            $this->session->remove($key);
         }
     }
 }

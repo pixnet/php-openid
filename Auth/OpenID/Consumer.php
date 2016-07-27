@@ -430,7 +430,7 @@ class Auth_OpenID_Consumer {
         $message = Auth_OpenID_Message::fromPostArgs($query);
         $response = $this->consumer->complete($message, $endpoint,
                                               $current_url);
-        $this->session->del($this->_token_key);
+        $this->session->remove($this->_token_key);
 
         if (in_array($response->status, array(Auth_OpenID_SUCCESS,
                                               Auth_OpenID_CANCEL))) {
