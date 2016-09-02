@@ -1038,7 +1038,7 @@ class Auth_OpenID_CheckIDRequest extends Auth_OpenID_Request {
 
             } else if ($this->identity) {
                 if ($identity &&
-                    ($this->identity != $identity)) {
+                    (strtolower($this->identity) != strtolower($identity))) {
                     $fmt = "Request was for %s, cannot reply with identity %s";
                     return new Auth_OpenID_ServerError(null,
                       sprintf($fmt, $this->identity, $identity));
