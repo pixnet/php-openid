@@ -108,7 +108,7 @@ class Auth_OpenID_Parse {
     var $_open_tag_expr = "<%s\b";
     var $_close_tag_expr = "<((\/%s\b)|(%s[^>\/]*\/))>";
 
-    function Auth_OpenID_Parse()
+    function __construct()
     {
         $this->_link_find = sprintf("/<link\b(?!:)([^>]*)(?!<)>/%s",
                                     $this->_re_flags);
@@ -219,11 +219,8 @@ class Auth_OpenID_Parse {
     function match($regexp, $text, &$match)
     {
         if (!is_callable('mb_ereg_search_init')) {
-            if (!preg_match($regexp, $text, $match)) {
-                return false;
-            }
-            $match = $match[0];
-            return true;
+            // use array instead of string in match result, refs. #47765
+            return preg_match($regexp, $text, $match);
         }
 
         $regexp = substr($regexp, 1, strlen($regexp) - 2 - strlen($this->_re_flags));
