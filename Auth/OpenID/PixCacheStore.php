@@ -135,11 +135,12 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         
         // returns false when nonce already exists
         // otherwise adds nonce
-        return $this->cache::put(
+        $this->cache::put(
             'otp_openid_nonce_' . sha1($server_url) . '_' . sha1($salt), 
             1, // any value here 
             array('expire' => $Auth_OpenID_SKEW)
         );
+        return true;
     }
     
     /**
