@@ -35,12 +35,12 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $serverAssociations[$association->issued] = $associationKey;
         
         // save associations' keys list 
-        $this->cache->set(
+        $this->cache::put(
             $serverKey,
             $serverAssociations
         );
         // save association itself
-        $this->cache->set(
+        $this->cache::put(
             $associationKey,
             $association,
             array('expire' => $association->lifetime)
@@ -111,7 +111,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $serverAssociations = array_flip($serverAssociations);
         
         // save updated list
-        $this->cache->set(
+        $this->cache::put(
             $serverKey,
             $serverAssociations
         );
@@ -135,7 +135,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         
         // returns false when nonce already exists
         // otherwise adds nonce
-        return $this->cache->add(
+        return $this->cache::put(
             'otp_openid_nonce_' . sha1($server_url) . '_' . sha1($salt), 
             1, // any value here 
             array('expire' => $Auth_OpenID_SKEW)
