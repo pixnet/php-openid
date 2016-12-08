@@ -37,7 +37,8 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         // save associations' keys list 
         $this->cache::put(
             $serverKey,
-            $serverAssociations
+            $serverAssociations,
+            86400
         );
         // save association itself
         $this->cache::put(
@@ -113,7 +114,8 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         // save updated list
         $this->cache::put(
             $serverKey,
-            $serverAssociations
+            $serverAssociations,
+            86400
         );
 
         // delete association 
