@@ -44,7 +44,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $this->cache::put(
             $associationKey,
             $association,
-            array('expire' => $association->lifetime)
+            $association->lifetime
         );
     }
 
@@ -140,7 +140,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $this->cache::put(
             'otp_openid_nonce_' . sha1($server_url) . '_' . sha1($salt), 
             1, // any value here 
-            array('expire' => $Auth_OpenID_SKEW)
+            $Auth_OpenID_SKEW
         );
         return true;
     }
