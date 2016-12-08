@@ -473,7 +473,7 @@ class Auth_Yadis_Discovery {
         // Extract the YadisServiceManager for this object's URL and
         // suffix from the session.
 
-        $manager_str = $this->session->get($this->getSessionKey());
+        $manager_str = $this->session::get($this->getSessionKey());
         $manager = null;
 
         if ($manager_str !== null) {

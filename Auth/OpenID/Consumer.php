@@ -423,7 +423,7 @@ class Auth_OpenID_Consumer {
         }
 
         $loader = new Auth_OpenID_ServiceEndpointLoader();
-        $endpoint_data = $this->session->get($this->_token_key);
+        $endpoint_data = $this->session::get($this->_token_key);
         $endpoint =
             $loader->fromSession($endpoint_data);
 
