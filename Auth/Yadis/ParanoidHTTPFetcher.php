@@ -150,7 +150,8 @@ class Auth_Yadis_ParanoidHTTPFetcher extends Auth_Yadis_HTTPFetcher {
                     curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
                 }
             }
-            curl_setopt($c, CURLOPT_PROXY, $this->getAuthOpenIdHttpProxy());
+            //temp 測試使用 proxy
+            //curl_setopt($c, CURLOPT_PROXY, $this->getAuthOpenIdHttpProxy());
             curl_exec($c);
 
             $code = curl_getinfo($c, CURLINFO_HTTP_CODE);
