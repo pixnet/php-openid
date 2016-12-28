@@ -210,8 +210,8 @@ class Auth_Yadis_ParanoidHTTPFetcher extends Auth_Yadis_HTTPFetcher {
         if (defined('CURLOPT_NOSIGNAL')) {
             curl_setopt($c, CURLOPT_NOSIGNAL, true);
         }
-
-        curl_setopt($c, CURLOPT_PROXY, $this->getAuthOpenIdHttpProxy());
+        //temp 測試使用 proxy
+        //curl_setopt($c, CURLOPT_PROXY, $this->getAuthOpenIdHttpProxy());
 
         curl_setopt($c, CURLOPT_POST, true);
         curl_setopt($c, CURLOPT_POSTFIELDS, $body);
