@@ -23,9 +23,10 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $associationKey = $this->associationKey($server_url, 
             $association->handle);
         $serverKey = $this->associationServerKey($server_url);
+        $cache = $this->cache;
         
         // get list of associations 
-        $serverAssociations = $this->cache::get($serverKey);
+        $serverAssociations = $cache::get($serverKey);
         
         // if no such list, initialize it with empty array
         if (!$serverAssociations) {
@@ -35,13 +36,13 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $serverAssociations[$association->issued] = $associationKey;
         
         // save associations' keys list 
-        $this->cache::put(
+        $cache::put(
             $serverKey,
             $serverAssociations,
             86400
         );
         // save association itself
-        $this->cache::put(
+        $cache::put(
             $associationKey,
             $association,
             $association->lifetime
@@ -54,10 +55,11 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
      */
     function getAssociation($server_url, $handle = null)
     {
+        $cache = $this->cache;
         // simple case: handle given
         if ($handle !== null) {
             // get association, return null if failed
-            $association = $this->cache::get(
+            $association = $cache::get(
                 $this->associationKey($server_url, $handle));
             return $association ? $association : null;
         }
@@ -67,7 +69,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $serverKey = $this->associationServerKey($server_url);
         
         // get list of associations
-        $serverAssociations = $this->cache::get($serverKey);
+        $serverAssociations = $cache::get($serverKey);
         // return null if failed or got empty list
         if (!$serverAssociations) {
             return null;
@@ -79,7 +81,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $lastKey = $serverAssociations[array_pop($keys)];
         
         // get association, return null if failed
-        $association = $this->cache::get($lastKey);
+        $association = $cache::get($lastKey);
         return $association ? $association : null;
     }
 
@@ -93,9 +95,10 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $serverKey = $this->associationServerKey($server_url);
         $associationKey = $this->associationKey($server_url, 
             $handle);
+        $cache = $this->cache;
         
         // get list of associations
-        $serverAssociations = $this->cache::get($serverKey);
+        $serverAssociations = $cache::get($serverKey);
         // return null if failed or got empty list
         if (!$serverAssociations) {
             return false;
@@ -112,7 +115,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         $serverAssociations = array_flip($serverAssociations);
         
         // save updated list
-        $this->cache::put(
+        $cache::put(
             $serverKey,
             $serverAssociations,
             86400
@@ -137,7 +140,8 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         
         // returns false when nonce already exists
         // otherwise adds nonce
-        $this->cache::put(
+        $cache = $this->cache;
+        $cache::put(
             'otp_openid_nonce_' . sha1($server_url) . '_' . sha1($salt), 
             1, // any value here 
             $Auth_OpenID_SKEW
