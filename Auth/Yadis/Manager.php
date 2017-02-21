@@ -423,7 +423,8 @@ class Auth_Yadis_Discovery {
         if ($manager) {
             $loader = new Auth_Yadis_ManagerLoader();
             $service = $manager->nextService();
-            $this->session::set($this->session_key,
+            $session = $this->session;
+            $session::set($this->session_key,
                                 serialize($loader->toSession($manager)));
         } else {
             $service = null;
@@ -472,8 +473,8 @@ class Auth_Yadis_Discovery {
     {
         // Extract the YadisServiceManager for this object's URL and
         // suffix from the session.
-
-        $manager_str = $this->session::get($this->getSessionKey());
+        $session = $this->session;
+        $manager_str = $session::get($this->getSessionKey());
         $manager = null;
 
         if ($manager_str !== null) {
@@ -500,7 +501,8 @@ class Auth_Yadis_Discovery {
             $loader = new Auth_Yadis_ManagerLoader();
             $manager = new Auth_Yadis_Manager($this->url, $yadis_url,
                                               $services, $key);
-            $this->session::set($this->session_key,
+            $session = $this->session;
+            $session::set($this->session_key,
                                 serialize($loader->toSession($manager)));
             return $manager;
         }
@@ -516,7 +518,8 @@ class Auth_Yadis_Discovery {
     {
         if ($this->getManager($force) !== null) {
             $key = $this->getSessionKey();
-            $this->session::forget($key);
+            $session = $this->session;
+            $session::forget($key);
         }
     }
 }

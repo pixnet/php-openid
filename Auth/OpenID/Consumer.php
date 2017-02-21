@@ -324,6 +324,7 @@ class Auth_OpenID_Consumer {
         // to be cleaned up next time discovery is attempted.
 
         $m = $disco->getManager();
+        $session = $disco->session;
         $loader = new Auth_Yadis_ManagerLoader();
 
         if ($m) {
@@ -331,7 +332,7 @@ class Auth_OpenID_Consumer {
                 $disco->destroyManager();
             } else {
                 $m->stale = true;
-                $disco->session::set($disco->session_key,
+                $session::set($disco->session_key,
                                      serialize($loader->toSession($m)));
             }
         }
@@ -343,7 +344,7 @@ class Auth_OpenID_Consumer {
         $m = $disco->getManager();
         if ($m) {
             $m->stale = false;
-            $disco->session::set($disco->session_key,
+            $session::set($disco->session_key,
                                  serialize($loader->toSession($m)));
         }
 
@@ -375,7 +376,8 @@ class Auth_OpenID_Consumer {
     {
         $loader = new Auth_OpenID_ServiceEndpointLoader();
         $auth_req = $this->consumer->begin($endpoint);
-        $this->session::set($this->_token_key,
+        $session = $this->session;
+        $session::set($this->_token_key,
               $loader->toSession($auth_req->endpoint));
         if (!$auth_req->setAnonymous($anonymous)) {
             return new Auth_OpenID_FailureResponse(null,
@@ -423,14 +425,15 @@ class Auth_OpenID_Consumer {
         }
 
         $loader = new Auth_OpenID_ServiceEndpointLoader();
-        $endpoint_data = $this->session::get($this->_token_key);
+        $session = $this->session;
+        $endpoint_data = $session::get($this->_token_key);
         $endpoint =
             $loader->fromSession($endpoint_data);
 
         $message = Auth_OpenID_Message::fromPostArgs($query);
         $response = $this->consumer->complete($message, $endpoint,
                                               $current_url);
-        $this->session::forget($this->_token_key);
+        $session::forget($this->_token_key);
 
         if (in_array($response->status, array(Auth_OpenID_SUCCESS,
                                               Auth_OpenID_CANCEL))) {
