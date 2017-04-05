@@ -424,7 +424,7 @@ class Auth_Yadis_Discovery {
             $loader = new Auth_Yadis_ManagerLoader();
             $service = $manager->nextService();
             $session = $this->session;
-            $session::set($this->session_key,
+            $session::put($this->session_key,
                                 serialize($loader->toSession($manager)));
         } else {
             $service = null;
@@ -502,7 +502,7 @@ class Auth_Yadis_Discovery {
             $manager = new Auth_Yadis_Manager($this->url, $yadis_url,
                                               $services, $key);
             $session = $this->session;
-            $session::set($this->session_key,
+            $session::put($this->session_key,
                                 serialize($loader->toSession($manager)));
             return $manager;
         }

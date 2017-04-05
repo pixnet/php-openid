@@ -332,7 +332,7 @@ class Auth_OpenID_Consumer {
                 $disco->destroyManager();
             } else {
                 $m->stale = true;
-                $session::set($disco->session_key,
+                $session::put($disco->session_key,
                                      serialize($loader->toSession($m)));
             }
         }
@@ -344,7 +344,7 @@ class Auth_OpenID_Consumer {
         $m = $disco->getManager();
         if ($m) {
             $m->stale = false;
-            $session::set($disco->session_key,
+            $session::put($disco->session_key,
                                  serialize($loader->toSession($m)));
         }
 
@@ -377,7 +377,7 @@ class Auth_OpenID_Consumer {
         $loader = new Auth_OpenID_ServiceEndpointLoader();
         $auth_req = $this->consumer->begin($endpoint);
         $session = $this->session;
-        $session::set($this->_token_key,
+        $session::put($this->_token_key,
               $loader->toSession($auth_req->endpoint));
         if (!$auth_req->setAnonymous($anonymous)) {
             return new Auth_OpenID_FailureResponse(null,
