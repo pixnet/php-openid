@@ -328,13 +328,7 @@ class Auth_OpenID_Consumer {
         $loader = new Auth_Yadis_ManagerLoader();
 
         if ($m) {
-            if ($m->stale) {
-                $disco->destroyManager();
-            } else {
-                $m->stale = true;
-                $session::put($disco->session_key,
-                                     serialize($loader->toSession($m)));
-            }
+            $disco->destroyManager();
         }
 
         $endpoint = $disco->getNextService($this->discoverMethod,
