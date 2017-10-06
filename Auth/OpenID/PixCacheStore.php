@@ -117,7 +117,7 @@ class Auth_OpenID_PixCacheStore extends Auth_OpenID_OpenIDStore {
         );
 
         // delete association 
-        return $cache::forget($associationKey);
+        return $this->cache->delete($associationKey);
     }
 
     /**
