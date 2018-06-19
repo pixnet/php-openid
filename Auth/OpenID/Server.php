@@ -1496,6 +1496,10 @@ class Auth_OpenID_SigningEncoder extends Auth_OpenID_Encoder {
     {
         // the isinstance is a bit of a kludge... it means there isn't
         // really an adapter to make the interfaces quite match.
+        if (!is_object($response)) {
+            return new Auth_OpenID_ServerError(null, "Response is required");
+        }
+
         if (!is_a($response, 'Auth_OpenID_ServerError') &&
             $response->needsSigning()) {
 
